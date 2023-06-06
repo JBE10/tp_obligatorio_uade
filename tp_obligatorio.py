@@ -96,7 +96,7 @@ if len(lista_camiones) > 1:
     lista_horas = lista[3]
 
 print("===============================================================================")
-print("N-Camiones------Tiempo Promedio--------------Distancia Total--------Carga Total")
+print("N-Camiones-------Tiempo Promedio--------------Distancia Total-------Carga Total")
 print("===============================================================================")
 
 for i in range(len(lista_camiones)):
