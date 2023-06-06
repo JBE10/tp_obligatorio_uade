@@ -1,8 +1,5 @@
-#<<<<<<< HEAD
 #me falta sacar el promedio de las horas y que aparezcan en matricez 
-# BAUTI ES GAY
-#=======
-#>>>>>>> ce7de5427595c20c24c3d65f5c3b257280731111
+
 def cal_tiempo(t_t,c_v):
     hora_prom=[]
     dias_horas_prom=[]
