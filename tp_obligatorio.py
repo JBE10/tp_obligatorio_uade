@@ -1,68 +1,39 @@
 def cal_tiempo(t_t, c_v):
     hora_prom = []
     dias_horas_prom = []
-    axuliar = 0
-    ronda = 0
 
-    for i in t_t:
-        axuliar = i // c_v[ronda]
-        hora_prom.append(axuliar)
-        ronda += 1
+    for i in range(len(t_t)):
+        auxiliar = t_t[i] // c_v[i]
+        hora_prom.append(auxiliar)
 
     for i in hora_prom:
         dias = i // 24
-
         horas = i % 24
-
-        dias_horas_prom.append([dias, "D", horas, "h"])
+        dias_horas_prom.append([dias, "d", horas, "h"])
 
     return dias_horas_prom
 
 
-def ingreso_de_datos():
-    camiones = []
-    distancia = []
-    toneladas = []
-    horas = []
-    cantidad = []
-
-    a = int(input("Ingrese numero del camion: "))
-
-    while a != -1:
-        d = int(input("Ingrese numero de horas manejadas: "))
-        b = int(input("Ingrese distancia: "))
-        c = int(input("Ingrese cantidad de toneladas transportadas: "))
-
-        if a < 0 or b < 0 or c < 0 or d < 0:
-            print("Datos Invalidos, introduccir datos positivos")
-
+def ingreso_de_datos(camiones, distancia, toneladas, horas, cantidad, a, b, c, d):
+    encontrar = False
+    i = 0
+    while i < len(camiones):
+        if camiones[i] == a:
+            distancia[i] += b
+            toneladas[i] += c
+            horas[i] += d
+            cantidad[i] += 1
+            encontrar = True
+            break
         else:
-            encontrar = False
-            i = 0
-            while i < len(camiones):
-                if camiones[i] == a:
-                    distancia[i] += b
+            i += 1
 
-                    toneladas[i] += c
-
-                    horas[i] += d
-
-                    cantidad[i] += 1
-
-                    encontrar = True
-
-                    i = len(camiones)
-                else:
-                    i += 1
-
-            if not encontrar:
-                camiones.append(a)
-                distancia.append(b)
-                toneladas.append(c)
-                horas.append(d)
-                cantidad.append(1)
-
-        a = int(input("Ingrese numero del camion: "))
+    if not encontrar:
+        camiones.append(a)
+        distancia.append(b)
+        toneladas.append(c)
+        horas.append(d)
+        cantidad.append(1)
 
     hora_prom = cal_tiempo(horas, cantidad)
 
@@ -74,42 +45,64 @@ def ingreso_de_datos():
 def orden_lista(a, b, c, d):
     for i in range(len(a) - 1):
         for j in range(i + 1, len(a)):
-            if a[i] < a[j]:
-                auxiliar = a[i]
-                a[i] = a[j]
-                a[j] = auxiliar
-                auxiliar_b = b[i]
-                b[i] = b[j]
-                b[j] = auxiliar_b
-                auxiliar_c = c[i]
-                c[i] = c[j]
-                c[j] = auxiliar_c
-                auxiliar_d = d[i]
-                d[i] = d[j]
-                d[j] = auxiliar_d
+            if a[i] > a[j]:
+                a[i], a[j] = a[j], a[i]
+                b[i], b[j] = b[j], b[i]
+                c[i], c[j] = c[j], c[i]
+                d[i], d[j] = d[j], d[i]
 
-            lista = [a, b, c, d]
+    lista = [a, b, c, d]
     return lista
 
 
-lista = ingreso_de_datos()
+lista_camiones = []
+lista_distancias = []
+lista_toneladas = []
+lista_horas = []
 
-lista_camiones = lista[0]
-lista_distancias = lista[1]
-lista_toneladas = lista[2]
-lista_horas = lista[3]
+camiones = []
+distancia = []
+toneladas = []
+horas = []
+cantidad = []
+
+camion = int(input("Ingrese número del camión: "))
+while camion != -1:
+    if camion < 0:
+        print("Datos inválidos, introducir datos positivos")
+    else:
+        horas_manejadas = int(input("Ingrese número de horas manejadas: "))
+        distancia_recorrida = int(input("Ingrese distancia: "))
+        toneladas_transportadas = int(
+            input("Ingrese cantidad de toneladas transportadas: ")
+        )
+        lista = ingreso_de_datos(
+            camiones,
+            distancia,
+            toneladas,
+            horas,
+            cantidad,
+            camion,
+            distancia_recorrida,
+            toneladas_transportadas,
+            horas_manejadas,
+        )
+        lista_camiones = lista[0]
+        lista_distancias = lista[1]
+        lista_toneladas = lista[2]
+        lista_horas = lista[3]
+
+    camion = int(input("Ingrese número del camión: "))
 
 if len(lista_camiones) > 1:
     lista = orden_lista(lista_camiones, lista_distancias, lista_toneladas, lista_horas)
-
     lista_camiones = lista[0]
     lista_distancias = lista[1]
     lista_toneladas = lista[2]
     lista_horas = lista[3]
 
-
 print("===============================================================================")
-print("N-Camiones------Tiempo Promedio--------------Distancia Total--------Carge Total")
+print("N-Camiones------Tiempo Promedio--------------Distancia Total--------Carga Total")
 print("===============================================================================")
 
 for i in range(len(lista_camiones)):
@@ -125,7 +118,7 @@ for i in range(len(lista_camiones)):
             "                 ",
             lista_toneladas[i],
             "Tn",
-            "  |Revisión mecánica",
+            "  | Revisión mecánica",
         )
         print()
     else:
