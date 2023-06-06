@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+#me falta sacar el promedio de las horas y que aparezcan en matricez 
+
+>>>>>>> 9803494eaa6dabcee4751b5948e2c085d48feb97
 def cal_tiempo(t_t,c_v):
     hora_prom=[]
     dias_horas_prom=[]
