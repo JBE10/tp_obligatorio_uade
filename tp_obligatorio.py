@@ -95,39 +95,88 @@ if len(camiones) > 1:
     lista_toneladas = lista[2]
     lista_horas = lista[3]
 
+    print(
+        "==============================================================================="
+    )
+    print(
+        "N-Camiones------Tiempo Promedio--------------Distancia Total--------Carge Total"
+    )
+    print(
+        "==============================================================================="
+    )
 
-print("===============================================================================")
-print("N-Camiones------Tiempo Promedio--------------Distancia Total--------Carge Total")
-print("===============================================================================")
-i = 0
-for i in range(len(lista_camiones)):
-    if lista_distancias[i] > 20000:
-        print(
-            "|   ",
-            lista_camiones[i],
-            "      ",
-            lista_horas[i],
-            "           ",
-            lista_distancias[i],
-            "Km",
-            "                 ",
-            lista_toneladas[i],
-            "Tn",
-            "  |Revisión mecánica",
-        )
-        print()
-    else:
-        print(
-            "|   ",
-            lista_camiones[i],
-            "      ",
-            lista_horas[i],
-            "           ",
-            lista_distancias[i],
-            "Km",
-            "                 ",
-            lista_toneladas[i],
-            "Tn",
-            "  |",
-        )
-        print()
+    for i in range(len(lista_camiones)):
+        if lista_distancias[i] > 20000:
+            print(
+                "|   ",
+                lista_camiones[i],
+                "      ",
+                lista_horas[i],
+                "           ",
+                lista_distancias[i],
+                "Km",
+                "                 ",
+                lista_toneladas[i],
+                "Tn",
+                "  |Revisión mecánica",
+            )
+            print()
+        else:
+            print(
+                "|   ",
+                lista_camiones[i],
+                "      ",
+                lista_horas[i],
+                "           ",
+                lista_distancias[i],
+                "Km",
+                "                 ",
+                lista_toneladas[i],
+                "Tn",
+                "  |",
+            )
+            print()
+
+
+else:
+    print(
+        "==============================================================================="
+    )
+    print(
+        "N-Camiones------Tiempo Promedio--------------Distancia Total--------Carge Total"
+    )
+    print(
+        "==============================================================================="
+    )
+
+    for i in range(len(camiones)):
+        if distancia[i] > 20000:
+            print(
+                "|   ",
+                camiones[i],
+                "      ",
+                hora_prom[i],
+                "           ",
+                distancia[i],
+                "Km",
+                "                 ",
+                toneladas[i],
+                "Tn",
+                "  |Revisión mecánica",
+            )
+            print()
+        else:
+            print(
+                "|   ",
+                camiones[i],
+                "      ",
+                hora_prom[i],
+                "           ",
+                distancia[i],
+                "Km",
+                "                 ",
+                toneladas[i],
+                "Tn",
+                "  |",
+            )
+            print()
