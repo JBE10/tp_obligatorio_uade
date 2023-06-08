@@ -1,3 +1,7 @@
+#def que sirve para promediar la cantidad de  tiempo cada camion, t_t=tiempo total c_v=cantidad de viajes hechos por ese numero de camion
+#lo primero que se hace es sacar el promedio en horas es decir que los datos recibidos dividido a la cantiad de viajes
+#luego esas horas se dividen por 24 ya que 24 horas=un dia y luego se utiliza la funcion resto(%) para sacar las horas que quedan
+#luego se devuelve la lista dias y horas ya promediada
 def cal_tiempo(t_t, c_v):
     hora_prom = []
     dias_horas_prom = []
@@ -18,7 +22,8 @@ def cal_tiempo(t_t, c_v):
 
     return dias_horas_prom
 
-
+#esta funcion sirve para ordenar la lista de menor a mayor lo primero que se hace asignar un rango con len ya que el rango sera la cantidad de camiones
+#j es +1 de i ya que ira buscando una osicion mas adelante, el auxiliar ayudara a guaradar el item de la lista que esta siendo cambiado
 def orden_lista(a, b, c, d):
     for i in range(len(a) - 1):
         for j in range(i + 1, len(a)):
@@ -38,7 +43,7 @@ def orden_lista(a, b, c, d):
 
     lista = [a, b, c, d]
     return lista
-
+#programa principal en dodne se ingresar los datos y se almacenan
 
 camiones = []
 distancia = []
@@ -46,26 +51,26 @@ toneladas = []
 horas = []
 cantidad = []
 
-a = int(input("Ingrese numero del camion: "))
+n_camion = int(input("Ingrese numero del camion: "))
 
-while a != -1:
-    d = int(input("Ingrese numero de horas manejadas: "))
-    b = int(input("Ingrese distancia: "))
-    c = int(input("Ingrese cantidad de toneladas transportadas: "))
+while n_camion != -1:
+    cant_horas = int(input("Ingrese numero de horas manejadas: "))
+    cant_km = int(input("Ingrese distancia: "))
+    cant_tn = int(input("Ingrese cantidad de toneladas transportadas: "))
 
-    if a < 0 or b < 0 or c < 0 or d < 0:
+    if n_camion < 0 or cant_horas < 0 or cant_km < 0 or cant_tn < 0:
         print("Datos Invalidos, introduccir datos positivos")
-
+#aca se busca si el dato del camion no esta repetido con un bucle while 
     else:
         encontrar = False
         i = 0
         while i < len(camiones):
-            if camiones[i] == a:
-                distancia[i] += b
+            if camiones[i] == n_camion:
+                distancia[i] += cant_km
 
-                toneladas[i] += c
+                toneladas[i] += cant_tn
 
-                horas[i] += d
+                horas[i] += cant_horas
 
                 cantidad[i] += 1
 
@@ -76,13 +81,13 @@ while a != -1:
                 i += 1
 
         if not encontrar:
-            camiones.append(a)
-            distancia.append(b)
-            toneladas.append(c)
-            horas.append(d)
+            camiones.append(n_camion)
+            distancia.append(cant_km)
+            toneladas.append(cant_tn)
+            horas.append(cant_horas)
             cantidad.append(1)
 
-    a = int(input("Ingrese numero del camion: "))
+    n_camion = int(input("Ingrese numero del camion: "))
 
 hora_prom = cal_tiempo(horas, cantidad)
 
@@ -96,15 +101,16 @@ if len(camiones) > 1:
     lista_horas = lista[3]
     
     print("------------------------------------------------------------------------------------------------------------------------------------------------")
-    print("==================================================================================")
+    print("============================================================================================")
     print("------N-Camiones------------Tiempo Promedio--------------Distancia Total-----------Carge Total")
-    print("==================================================================================")
-    print("------------------------------------------------------------------------------------------------------------------------------------------------")    for i in range(len(lista_camiones)):
+    print("============================================================================================")
+    print("------------------------------------------------------------------------------------------------------------------------------------------------")
+    for i in range(len(lista_camiones)):
         if lista_distancias[i] > 20000:
-            print("|   ",lista_camiones[i],"      ",lista_horas[i],"           ",lista_distancias[i],"Km","                 ",lista_toneladas[i],"Tn","  |Revisión mecánica",)
+            print("|        ",lista_camiones[i],"              ",lista_horas[i],"              ",lista_distancias[i],"Km","                 ",lista_toneladas[i],"Tn","  |Revisión mecánica",)
             print("------------------------------------------------------------------------------------------------------------------------------------------------")
         else:
-            print("|   ",lista_camiones[i],"      ",lista_horas[i],"           ",lista_distancias[i],"Km","                 ",lista_toneladas[i],"Tn","  |",)
+            print("|        ",lista_camiones[i],"              ",lista_horas[i],"              ",lista_distancias[i],"Km","                 ",lista_toneladas[i],"Tn","  |",)
             print("------------------------------------------------------------------------------------------------------------------------------------------------")
 
 
@@ -116,12 +122,8 @@ else:
     print("------------------------------------------------------------------------------------------------------------------------------------------------")
     for i in range(len(camiones)):
         if distancia[i] > 20000:
-            print("|   ",camiones[i],"      ",hora_prom[i],"           ",distancia[i],"Km","                 ",toneladas[i], "Tn","  |Revisión mecánica",)
+            print("|        ",camiones[i],"              ",hora_prom[i],"           ",distancia[i],"Km","                  ",toneladas[i], "Tn","  |Revisión mecánica",)
             print("------------------------------------------------------------------------------------------------------------------------------------------------")
         else:
-            print("|   ",camiones[i],"      ",hora_prom[i],"           ",distancia[i], "Km","                 ",toneladas[i],"Tn","  |",)
+            print("|        ",camiones[i],"              ",hora_prom[i],"           ",distancia[i], "Km","                 ",toneladas[i],"Tn","  |",)
             print("------------------------------------------------------------------------------------------------------------------------------------------------")
-            
-
-
-
