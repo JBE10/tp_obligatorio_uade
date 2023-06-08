@@ -4,7 +4,9 @@
 # luego se devuelve la lista dias y horas ya promediada
 def cal_tiempo(t_t, c_v):
     hora_prom = []
-    dias_horas_prom = []
+    dias_p = []
+    horas_p = []
+
     axuliar = 0
     ronda = 0
 
@@ -14,13 +16,12 @@ def cal_tiempo(t_t, c_v):
         ronda += 1
 
     for i in range(len(hora_prom)):
-        dias = hora_prom[i] // 24
+        dias_p.append(hora_prom[i] // 24)
+        horas_p.append(hora_prom[i] % 24)
 
-        horas = hora_prom[i] % 24
+    lista_total = [dias_p, horas_p]
 
-        dias_horas_prom.append([dias, "d", horas, "h"])
-
-    return dias_horas_prom
+    return lista_total
 
 
 # esta funcion sirve para ordenar la lista de menor a mayor lo primero que se hace asignar un rango con len ya que el rango sera la cantidad de camiones
@@ -43,6 +44,28 @@ def orden_lista(a, b, c, d):
                 d[j] = auxiliar_d
 
     lista = [a, b, c, d]
+    return lista
+
+
+def ordenar_lista_insercion(a, b, c, d):
+    for i in range(1, len(a)):
+        aux = a[i]
+        aux_b = b[i]
+        aux_c = c[i]
+        aux_d = d[i]
+        j = i
+        while j > 0 and a[j - 1] > aux:
+            a[j] = a[j - 1]
+            b[j] = b[j - 1]
+            c[j] = c[j - 1]
+            d[j] = d[j - 1]
+            j -= 1
+        a[j] = aux
+        b[j] = aux_b
+        c[j] = aux_c
+        d[j] = aux_d
+    lista = [a, b, c, d]
+
     return lista
 
 
@@ -84,7 +107,7 @@ while n_camion != -1:
             else:
                 i += 1
 
-        if not encontrar:
+        if encontrar == False:
             camiones.append(n_camion)
             distancia.append(cant_km)
             toneladas.append(cant_tn)
@@ -94,10 +117,12 @@ while n_camion != -1:
     n_camion = int(input("Ingrese numero del camion: "))
 # se llama a la funcion para sacar el promedio de horas.
 hora_prom = cal_tiempo(horas, cantidad)
+dia_total = hora_prom[0]
+hora_total = hora_prom[1]
 
 # este if se utiliza para ver cuantos eleementos tiene la lsita, ya que si tiene solo un elemento no es necesario ordenarla
 if len(camiones) > 1:
-    lista = orden_lista(camiones, distancia, toneladas, hora_prom)
+    lista = ordenar_lista_insercion(camiones, distancia, toneladas, hora_prom)
     # desarmamos la lista entragada por la funcion y creamos nuevas listas con el vactor de cada valor por ejemplo lista[0] se refiere al primer lugar
     # de lista que corresponde a el numero de camiones
     lista_camiones = lista[0]
@@ -105,32 +130,120 @@ if len(camiones) > 1:
     lista_toneladas = lista[2]
     lista_horas = lista[3]
 
-    print("------------------------------------------------------------------------------------------------------------------------------------------------")
-    print("============================================================================================")
-    print("------N-Camiones------------Tiempo Promedio--------------Distancia Total-----------Carge Total")
-    print("============================================================================================")
-    print("------------------------------------------------------------------------------------------------------------------------------------------------")
+    print(
+        "------------------------------------------------------------------------------------------------------------------------------------------------"
+    )
+    print(
+        "============================================================================================"
+    )
+    print(
+        "------N-Camiones------------Tiempo Promedio--------------Distancia Total-----------Carge Total"
+    )
+    print(
+        "============================================================================================"
+    )
+    print(
+        "------------------------------------------------------------------------------------------------------------------------------------------------"
+    )
     for i in range(len(lista_camiones)):
         # Este if es para diferenciar los camiones con mas de 20000 km y agregarles un cartel de revision mecanica
         if lista_distancias[i] > 20000:
-            print("|        ",lista_camiones[i], "              ",lista_horas[i],"              ",lista_distancias[i],"Km","                 ",lista_toneladas[i],"Tn","  |Revisión mecánica",)
-            print("------------------------------------------------------------------------------------------------------------------------------------------------")
+            print(
+                "|        ",
+                lista_camiones[i],
+                "           ",
+                dia_total[i],
+                "dias",
+                hora_total[i],
+                "horas",
+                "              ",
+                lista_distancias[i],
+                "Km",
+                "                 ",
+                lista_toneladas[i],
+                "Tn",
+                "  |Revisión mecánica",
+            )
+            print(
+                "------------------------------------------------------------------------------------------------------------------------------------------------"
+            )
         else:
-            print("|        ",lista_camiones[i],"              ",lista_horas[i],"              ",lista_distancias[i],"Km","                 ",lista_toneladas[i],"Tn","  |",)
-            print("------------------------------------------------------------------------------------------------------------------------------------------------")
+            print(
+                "|        ",
+                lista_camiones[i],
+                "             ",
+                dia_total[i],
+                "dias",
+                hora_total[i],
+                "horas",
+                "              ",
+                lista_distancias[i],
+                "Km",
+                "                 ",
+                lista_toneladas[i],
+                "Tn",
+                "  |",
+            )
+            print(
+                "------------------------------------------------------------------------------------------------------------------------------------------------"
+            )
 
 
 else:
-    print("------------------------------------------------------------------------------------------------------------------------------------------------")
-    print("==================================================================================")
-    print("------N-Camiones------------Tiempo Promedio--------------Distancia Total-----------Carge Total")
-    print("==================================================================================")
-    print("------------------------------------------------------------------------------------------------------------------------------------------------" )
+    print(
+        "------------------------------------------------------------------------------------------------------------------------------------------------"
+    )
+    print(
+        "=================================================================================="
+    )
+    print(
+        "------N-Camiones------------Tiempo Promedio--------------Distancia Total-----------Carge Total"
+    )
+    print(
+        "=================================================================================="
+    )
+    print(
+        "------------------------------------------------------------------------------------------------------------------------------------------------"
+    )
     # atravez de este for in se imprimiran todos los elementos de la lista con sus valores correspondentes
     for i in range(len(camiones)):
         if distancia[i] > 20000:
-            print("|        ",camiones[i],"              ",hora_prom[i],"           ",distancia[i],"Km","                  ",toneladas[i],"Tn","  |Revisión mecánica",)
-            print("------------------------------------------------------------------------------------------------------------------------------------------------")
+            print(
+                "|        ",
+                camiones[i],
+                "           ",
+                dia_total[i],
+                "dias",
+                hora_total[i],
+                "horas",
+                "           ",
+                distancia[i],
+                "Km",
+                "                  ",
+                toneladas[i],
+                "Tn",
+                "  |Revisión mecánica",
+            )
+            print(
+                "------------------------------------------------------------------------------------------------------------------------------------------------"
+            )
         else:
-            print("|        ",camiones[i],"              ",hora_prom[i],"           ",distancia[i],"Km","                 ",toneladas[i],"Tn","  |",)
-            print("------------------------------------------------------------------------------------------------------------------------------------------------")
+            print(
+                "|        ",
+                camiones[i],
+                "           ",
+                dia_total[i],
+                "dias",
+                hora_total[i],
+                "horas",
+                "           ",
+                distancia[i],
+                "Km",
+                "                 ",
+                toneladas[i],
+                "Tn",
+                "  |",
+            )
+            print(
+                "------------------------------------------------------------------------------------------------------------------------------------------------"
+            )
