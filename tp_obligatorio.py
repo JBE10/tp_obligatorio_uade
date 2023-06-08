@@ -8,12 +8,10 @@ def cal_tiempo(t_t, c_v):
     horas_p = []
 
     axuliar = 0
-    ronda = 0
 
     for i in range(len(t_t)):
-        axuliar = t_t[i] // c_v[ronda]
+        axuliar = t_t[i] // c_v[i]
         hora_prom.append(axuliar)
-        ronda += 1
 
     for i in range(len(hora_prom)):
         dias_p.append(hora_prom[i] // 24)
@@ -24,47 +22,27 @@ def cal_tiempo(t_t, c_v):
     return lista_total
 
 
-# esta funcion sirve para ordenar la lista de menor a mayor lo primero que se hace asignar un rango con len ya que el rango sera la cantidad de camiones
-# j es +1 de i ya que ira buscando una osicion mas adelante, el auxiliar ayudara a guaradar el item de la lista que esta siendo cambiado
-def orden_lista(a, b, c, d):
-    for i in range(len(a) - 1):
-        for j in range(i + 1, len(a)):
-            if a[i] > a[j]:
-                auxiliar = a[i]
-                a[i] = a[j]
-                a[j] = auxiliar
-                auxiliar_b = b[i]
-                b[i] = b[j]
-                b[j] = auxiliar_b
-                auxiliar_c = c[i]
-                c[i] = c[j]
-                c[j] = auxiliar_c
-                auxiliar_d = d[i]
-                d[i] = d[j]
-                d[j] = auxiliar_d
-
-    lista = [a, b, c, d]
-    return lista
-
-
-def ordenar_lista_insercion(a, b, c, d):
+def ordenar_lista_insercion(a, b, c, d, e):
     for i in range(1, len(a)):
         aux = a[i]
         aux_b = b[i]
         aux_c = c[i]
         aux_d = d[i]
+        aux_e = e[i]
         j = i
         while j > 0 and a[j - 1] > aux:
             a[j] = a[j - 1]
             b[j] = b[j - 1]
             c[j] = c[j - 1]
             d[j] = d[j - 1]
+            e[j] = e[j - 1]
             j -= 1
         a[j] = aux
         b[j] = aux_b
         c[j] = aux_c
         d[j] = aux_d
-    lista = [a, b, c, d]
+        e[j] = aux_e
+    lista = [a, b, c, d, e]
 
     return lista
 
@@ -116,19 +94,24 @@ while n_camion != -1:
 
     n_camion = int(input("Ingrese numero del camion: "))
 # se llama a la funcion para sacar el promedio de horas.
+
+
 hora_prom = cal_tiempo(horas, cantidad)
 dia_total = hora_prom[0]
 hora_total = hora_prom[1]
 
 # este if se utiliza para ver cuantos eleementos tiene la lsita, ya que si tiene solo un elemento no es necesario ordenarla
 if len(camiones) > 1:
-    lista = ordenar_lista_insercion(camiones, distancia, toneladas, hora_prom)
+    lista = ordenar_lista_insercion(
+        camiones, distancia, toneladas, dia_total, hora_total
+    )
     # desarmamos la lista entragada por la funcion y creamos nuevas listas con el vactor de cada valor por ejemplo lista[0] se refiere al primer lugar
     # de lista que corresponde a el numero de camiones
     lista_camiones = lista[0]
     lista_distancias = lista[1]
     lista_toneladas = lista[2]
-    lista_horas = lista[3]
+    lista_dias = lista[3]
+    lista_horas = lista[4]
 
     print(
         "------------------------------------------------------------------------------------------------------------------------------------------------"
@@ -152,9 +135,9 @@ if len(camiones) > 1:
                 "|        ",
                 lista_camiones[i],
                 "           ",
-                dia_total[i],
+                lista_dias[i],
                 "dias",
-                hora_total[i],
+                lista_horas[i],
                 "horas",
                 "              ",
                 lista_distancias[i],
@@ -172,9 +155,9 @@ if len(camiones) > 1:
                 "|        ",
                 lista_camiones[i],
                 "             ",
-                dia_total[i],
+                lista_dias[i],
                 "dias",
-                hora_total[i],
+                lista_horas[i],
                 "horas",
                 "              ",
                 lista_distancias[i],
