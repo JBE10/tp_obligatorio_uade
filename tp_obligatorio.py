@@ -47,7 +47,7 @@ def ordenar_lista_insercion(a, b, c, d, e):
     return lista
 
 
-# programa principal en dodne se ingresar los datos y se almacenan
+# programa principal en donde se ingresan los datos y se almacenan
 
 camiones = []
 distancia = []
@@ -65,7 +65,7 @@ while n_camion != -1:
     if n_camion < 0 or cant_horas < 0 or cant_km < 0 or cant_tn < 0:
         print("Datos Invalidos, introduccir datos positivos")
     # aca se busca si el dato del camion no esta repetido con un bucle while , si lo esta se le suman los valores de km horas y toneladas, si el n camion
-    # no ecxistew en la lista se agrega
+    # no existe en la lista se agrega
     else:
         encontrar = False
         i = 0
@@ -100,7 +100,7 @@ hora_prom = cal_tiempo(horas, cantidad)
 dia_total = hora_prom[0]
 hora_total = hora_prom[1]
 
-# este if se utiliza para ver cuantos eleementos tiene la lsita, ya que si tiene solo un elemento no es necesario ordenarla
+# este if se utiliza para ver cuantos elementos tiene la lsita, ya que si tiene solo un elemento no es necesario ordenarla
 if len(camiones) > 1:
     lista = ordenar_lista_insercion(
         camiones, distancia, toneladas, dia_total, hora_total
@@ -188,7 +188,7 @@ else:
     print(
         "------------------------------------------------------------------------------------------------------------------------------------------------"
     )
-    # atravez de este for in se imprimiran todos los elementos de la lista con sus valores correspondentes
+    # atravez de este for in se imprimiran todos los elementos de la lista con sus valores correspondientes
     for i in range(len(camiones)):
         if distancia[i] > 20000:
             print(
